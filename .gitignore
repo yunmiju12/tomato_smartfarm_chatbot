@@ -1,0 +1,23 @@
+# 환경변수
+.env
+**/.env
+
+# Python 가상환경
+.venv/
+**/.venv/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Node
+node_modules/
+**/node_modules/
+
+# Vite build
+dist/
+**/dist/
+
+# IDE
+.vscode/
