@@ -1,10 +1,24 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+
 import mysql.connector
+import os
+
 from mysql.connector import Error
 from datetime import datetime, timedelta
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "https://yunmiju12.github.io",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ================================
 # DB 연결
@@ -12,14 +26,19 @@ app = FastAPI()
 def get_db_connection():
     try:
         return mysql.connector.connect(
-            host="localhost",
-            user="tomato_user",
-            password="1234",
-            database="tomato_chatbot",
+            host=os.getenv("MYSQLHOST"),
+            port=int(os.getenv("MYSQLPORT", "3306")),
+            user=os.getenv("MYSQLUSER"),
+            password=os.getenv("MYSQLPASSWORD"),
+            database=os.getenv("MYSQLDATABASE"),
         )
+
     except Error as e:
         print("MySQL 연결 오류:", e)
-        raise HTTPException(status_code=500, detail="MySQL 연결 실패")
+        raise HTTPException(
+            status_code=500,
+            detail="MySQL 연결 실패"
+        )
 
 
 # ================================
@@ -265,6 +284,7 @@ app.add_middleware(
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://192.168.0.76:5173",
+        "https://yunmiju12.github.io",
     ],
     allow_credentials=True,
     allow_methods=["*"],

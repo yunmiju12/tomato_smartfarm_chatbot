@@ -38,10 +38,11 @@ PTY_TEXT = {
 
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="tomato_user",
-        password="1234",
-        database="tomato_chatbot",
+        host=os.getenv("MYSQLHOST"),
+        port=int(os.getenv("MYSQLPORT", "3306")),
+        user=os.getenv("MYSQLUSER"),
+        password=os.getenv("MYSQLPASSWORD"),
+        database=os.getenv("MYSQLDATABASE"),
     )
 
 
