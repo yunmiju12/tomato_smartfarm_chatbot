@@ -1,0 +1,33 @@
+# 환경변수
+.env
+**/.env
+.env.*
+**/.env.*
+
+# 단, 예제 환경변수 파일은 허용
+!.env.example
+!**/.env.example
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Python virtual environment
+.venv/
+**/.venv/
+venv/
+**/venv/
+
+# Node
+node_modules/
+**/node_modules/
+
+# Vite build
+dist/
+**/dist/
+
+# OS
+.DS_Store
+Thumbs.db
